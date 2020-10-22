@@ -4,8 +4,8 @@ import "./app.scss";
 
 const App = () => (
   <>
-    <h1>asdasssssssd</h1>
-    <h2>testssstst</h2>
+    <h1>vvaaassd</h1>
+    <h2>11</h2>
     <DataFetching />
   </>
 );
