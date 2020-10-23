@@ -7,16 +7,26 @@ const DataFetching = () => {
   const [price, setPrice] = useState();
 
   useEffect(() => {
-    axios
-      .get("https://www.bitstamp.net/api/v2/ticker/btcusd")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  return <div></div>;
+    const interval = setInterval(() => {
+      axios
+        .get("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT")
+        .then((res) => {
+          console.log(res.data.price);
+          setPrice(res.data.price);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div>
+      {price}
+    </div>
+  );
 };
 
 export default DataFetching;
