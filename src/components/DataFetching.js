@@ -5,37 +5,45 @@ import axios from "axios";
 import "./app.scss";
 
 const DataFetching = () => {
-  const [price, setPrice] = useState([{ symbol: "", price: "" }]);
+  const [price, setPrice] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      axios
-        .all([
-          axios.get(
-            "https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT"
-          ),
-          axios.get(
-            "https://api.binance.com/api/v1/ticker/price?symbol=ETHUSDT"
-          ),
-        ])
+      const url =
+        "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
 
-        .then(
-          axios.spread((obj1, obj2) => {
-            setPrice([obj1.data, obj2.data]);
-          })
-        )
+      const config = {
+        headers: {
+          "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
+        },
+      };
+
+      axios
+        .get(url, config)
+        .then((res) => {
+          setPrice(res.data.data);
+          console.log(res.data.data);
+        })
         .catch((err) => {
           console.log(err);
         });
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
-
   return (
     <div>
       <ul>
         {price.map((x) => (
-          <Cryptocurrency symbol={x.symbol} price={x.price} />
+          <Cryptocurrency
+            key={x.id}
+            symbol={x.name}
+            price={x.quote.USD.price}
+            last24={x.quote.USD.volume_24h}
+            last7={x.quote.USD.percent_change_7d}
+            supply={x.circulating_supply}
+            volume={x.quote.USD.volume_24h}
+            marketcap={x.quote.USD.market_cap}
+          />
         ))}
       </ul>
     </div>
