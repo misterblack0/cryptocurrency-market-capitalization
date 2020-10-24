@@ -2,30 +2,32 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Cryptocurrency from "./Cryptocurrency";
 import axios from "axios";
-import "./app.scss";
 
 const DataFetching = () => {
   const [data, setData] = useState([]);
 
+  const apiGetData = () => {
+    const url =
+      "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    const config = {
+      headers: {
+        "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
+      },
+    };
+    axios
+      .get(url, config)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
+    apiGetData();
     const interval = setInterval(() => {
-      const url =
-        "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
-
-      const config = {
-        headers: {
-          "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
-        },
-      };
-
-      axios
-        .get(url, config)
-        .then((res) => {
-          setData(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      apiGetData();
     }, 3000);
     return () => clearInterval(interval);
   }, []);
