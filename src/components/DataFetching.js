@@ -28,7 +28,7 @@ const DataFetching = () => {
     apiGetData();
     const interval = setInterval(() => {
       apiGetData();
-    }, 3000);
+    }, 15000);
     return () => clearInterval(interval);
   }, []);
   return (
