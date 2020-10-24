@@ -5,7 +5,7 @@ import axios from "axios";
 import "./app.scss";
 
 const DataFetching = () => {
-  const [price, setPrice] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,8 +21,7 @@ const DataFetching = () => {
       axios
         .get(url, config)
         .then((res) => {
-          setPrice(res.data.data);
-          console.log(res.data.data);
+          setData(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -33,7 +32,7 @@ const DataFetching = () => {
   return (
     <div>
       <ul>
-        {price.map((x) => (
+        {data.map((x) => (
           <Cryptocurrency
             key={x.id}
             symbol={x.name}
