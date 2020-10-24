@@ -37,9 +37,9 @@ const DataFetching = () => {
           <Cryptocurrency
             key={x.id}
             symbol={x.name}
-            price={x.quote.USD.price}
-            last24={x.quote.USD.volume_24h}
-            last7={x.quote.USD.percent_change_7d}
+            currentPrice={x.quote.USD.price}
+            percent_change_24h={x.quote.USD.volume_24h}
+            percent_change_7d={x.quote.USD.percent_change_7d}
             supply={x.circulating_supply}
             volume={x.quote.USD.volume_24h}
             marketcap={x.quote.USD.market_cap}

@@ -2,9 +2,19 @@ import React from "react";
 import DataFetching from "./DataFetching";
 import "./app.scss";
 
-const Cryptocurrency = ({ symbol, price, last24, last7, supply, volume, marketcap }) => (
+const Cryptocurrency = ({
+  symbol,
+  currentPrice,
+  percent_change_24h,
+  percent_change_7d,
+  supply,
+  volume,
+  marketcap,
+}) => (
   <li>
-    {symbol}, Price: {price}, 24H: {last24}, 7D: {last7} Circulating supply: {supply}, Volume: {volume}, Marketcap: {marketcap}
+    {symbol}, Price: {currentPrice}, 24H: {percent_change_24h}, 7D:{" "}
+    {percent_change_7d} Circulating supply: {supply}, Volume: {volume},
+    Marketcap: {marketcap}
   </li>
 );
 
