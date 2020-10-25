@@ -4,7 +4,7 @@ import Cryptocurrency from "./Cryptocurrency";
 import axios from "axios";
 
 const DataFetching = () => {
-  const [data, setData] = useState([]);
+  const [responseData, setResponseData] = useState([]);
 
   const apiGetData = () => {
     const url =
@@ -13,13 +13,13 @@ const DataFetching = () => {
     const config = {
       headers: {
         "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
-        /* "X-CMC_PRO_API_KEY": "e6dcecd7-a6ca-46bd-8ede-c7bda6b5d29d" */
+       /* "X-CMC_PRO_API_KEY": "e6dcecd7-a6ca-46bd-8ede-c7bda6b5d29d" */
       },
     };
     axios
       .get(url, config)
       .then((res) => {
-        setData(res.data.data);
+        setResponseData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +36,7 @@ const DataFetching = () => {
   return (
     <div>
       <ul>
-        {data.map((coin) => (
+        {responseData.map((coin) => (
           <Cryptocurrency
             key={coin.id}
             symbol={coin.name}
