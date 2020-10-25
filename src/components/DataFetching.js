@@ -9,9 +9,11 @@ const DataFetching = () => {
   const apiGetData = () => {
     const url =
       "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    /* "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"; */
     const config = {
       headers: {
         "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
+        /* "X-CMC_PRO_API_KEY": "e6dcecd7-a6ca-46bd-8ede-c7bda6b5d29d" */
       },
     };
     axios
@@ -34,16 +36,16 @@ const DataFetching = () => {
   return (
     <div>
       <ul>
-        {data.map((x) => (
+        {data.map((coin) => (
           <Cryptocurrency
-            key={x.id}
-            symbol={x.name}
-            currentPrice={x.quote.USD.price}
-            percent_change_24h={x.quote.USD.volume_24h}
-            percent_change_7d={x.quote.USD.percent_change_7d}
-            supply={x.circulating_supply}
-            volume={x.quote.USD.volume_24h}
-            marketcap={x.quote.USD.market_cap}
+            key={coin.id}
+            symbol={coin.name}
+            currentPrice={coin.quote.USD.price}
+            percent_change_24h={coin.quote.USD.volume_24h}
+            percent_change_7d={coin.quote.USD.percent_change_7d}
+            supply={coin.circulating_supply}
+            volume={coin.quote.USD.volume_24h}
+            marketcap={coin.quote.USD.market_cap}
           />
         ))}
       </ul>

@@ -41,6 +41,7 @@ module.exports = {
   },
   devServer: {
     contentBase: "./public",
+    open: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
