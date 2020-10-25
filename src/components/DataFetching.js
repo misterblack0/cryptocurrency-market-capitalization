@@ -40,12 +40,27 @@ const DataFetching = () => {
           <Cryptocurrency
             key={coin.id}
             symbol={coin.name}
-            currentPrice={coin.quote.USD.price}
-            percent_change_24h={coin.quote.USD.volume_24h}
-            percent_change_7d={coin.quote.USD.percent_change_7d}
-            supply={coin.circulating_supply}
-            volume={coin.quote.USD.volume_24h}
-            marketcap={coin.quote.USD.market_cap}
+            currentPrice={`${coin.quote.USD.price.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}`}
+            percent_change_24h={`${
+              coin.quote.USD.percent_change_24h.toFixed(2) + "%"
+            }`}
+            percent_change_7d={`${
+              coin.quote.USD.percent_change_7d.toFixed(2) + "%"
+            }`}
+            supply={coin.circulating_supply.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+            volume={`${coin.quote.USD.volume_24h.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}`}
+            marketcap={`${coin.quote.USD.market_cap.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}`}
           />
         ))}
       </ul>

@@ -1,6 +1,5 @@
 import React from "react";
-import DataFetching from "./DataFetching";
-import "./app.scss";
+import "./cryptocurrency.scss";
 
 const Cryptocurrency = ({
   symbol,
@@ -11,9 +10,11 @@ const Cryptocurrency = ({
   volume,
   marketcap,
 }) => (
-  <li>
-    {symbol}, Price: {currentPrice}, 24H: {percent_change_24h}, 7D:{" "}
-    {percent_change_7d} Circulating supply: {supply}, Volume: {volume},
+  /* to implement react table */
+  <li className="crypto">
+    <div>{symbol}</div> <div> Price: {currentPrice}</div>{" "}
+    <div>24H: {percent_change_24h}</div> 7D: {percent_change_7d}{" "}
+    <div>Circulating supply: {supply}</div> <div>Volume: {volume}</div>
     Marketcap: {marketcap}
   </li>
 );
