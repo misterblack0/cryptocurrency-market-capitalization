@@ -7,17 +7,16 @@ const DataFetching = () => {
   const [responseData, setResponseData] = useState([]);
 
   const apiGetData = () => {
-    const url =
+    const apiUrl =
       "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
     /* "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"; */
     const config = {
       headers: {
-        "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
-       /* "X-CMC_PRO_API_KEY": "e6dcecd7-a6ca-46bd-8ede-c7bda6b5d29d" */
+        "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
       },
     };
     axios
-      .get(url, config)
+      .get(apiUrl, config)
       .then((res) => {
         setResponseData(res.data.data);
       })
