@@ -1,5 +1,5 @@
 import React from "react";
-import "./cryptocurrency.scss";
+import "../styles/cryptocurrency.scss";
 
 const Cryptocurrency = ({
   symbol,
