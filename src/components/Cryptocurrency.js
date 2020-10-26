@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/cryptocurrency.scss";
 
-const Cryptocurrency = ({
+export const Cryptocurrency = ({
   symbol,
   currentPrice,
   percent_change_24h,
@@ -18,5 +18,3 @@ const Cryptocurrency = ({
     Marketcap: {marketcap}
   </li>
 );
-
-export default Cryptocurrency;

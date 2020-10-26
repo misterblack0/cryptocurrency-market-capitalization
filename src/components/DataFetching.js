@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Cryptocurrency from "./Cryptocurrency";
+import { Cryptocurrency } from "./Cryptocurrency";
 import axios from "axios";
 
 const DataFetching = () => {
@@ -32,6 +32,9 @@ const DataFetching = () => {
     }, 15000);
     return () => clearInterval(interval);
   }, []);
+
+  console.log(responseData[1].quote.USD.price);
+
   return (
     <div>
       <ul>
