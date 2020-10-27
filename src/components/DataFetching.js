@@ -1,10 +1,15 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { Cryptocurrency } from "./Cryptocurrency";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import "../styles/table.scss";
+import Table from "./Table";
 
-const DataFetching = () => {
-  const [responseData, setResponseData] = useState([]);
+export const DataFetching = () => {
+  // data state to store the CMC API data. Its initial value is an empty array
+
+  const [data, setData] = useState([]);
+
+  // API mount call configuration
 
   const apiGetData = () => {
     const apiUrl =
@@ -18,14 +23,14 @@ const DataFetching = () => {
     axios
       .get(apiUrl, config)
       .then((res) => {
-        setResponseData(res.data.data);
-        
-        
+        setData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  // Using useEffect to call the API once mounted and set the data
 
   useEffect(() => {
     apiGetData();
@@ -35,41 +40,50 @@ const DataFetching = () => {
     return () => clearInterval(interval);
   }, []);
 
-console.log(responseData);
-  
+  // Format data into a currency value
+
+  const options = { style: "currency", currency: "USD" };
+  const numberFormat = new Intl.NumberFormat("en-US", options);
+
+  // React-table columns logic
+
+  const columns = useMemo(() => [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Price",
+      accessor: "quote.USD.price",
+      Cell: (props) => numberFormat.format(props.value),
+    },
+    {
+      Header: "24H",
+      accessor: "quote.USD.percent_change_24h",
+    },
+    {
+      Header: "7d",
+      accessor: "quote.USD.percent_change_7d",
+    },
+    {
+      Header: "Market Cap",
+      accessor: "quote.USD.market_cap",
+      Cell: (props) => numberFormat.format(props.value),
+    },
+    {
+      Header: "Volume",
+      accessor: "quote.USD.volume_24h",
+      Cell: (props) => numberFormat.format(props.value),
+    },
+    {
+      Header: "Circulating Supply",
+      accessor: "circulating_supply",
+    },
+  ]);
+
   return (
     <div>
-      <ul>
-        {responseData.map((coin) => (
-          <Cryptocurrency
-            key={coin.id}
-            symbol={coin.name}
-            currentPrice={`${coin.quote.USD.price.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}`}
-            percent_change_24h={`${
-              coin.quote.USD.percent_change_24h.toFixed(2) + "%"
-            }`}
-            percent_change_7d={`${
-              coin.quote.USD.percent_change_7d.toFixed(2) + "%"
-            }`}
-            supply={coin.circulating_supply.toLocaleString("en-US", {
-              maximumFractionDigits: 2,
-            })}
-            volume={`${coin.quote.USD.volume_24h.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}`}
-            marketcap={`${coin.quote.USD.market_cap.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}`}
-          />
-        ))}
-      </ul>
+      <Table columns={columns} data={data} />
     </div>
   );
 };
-
-export default DataFetching;

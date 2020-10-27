@@ -31,7 +31,9 @@ export default function Table({ columns, data }) {
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
-          prepareRow(row);
+          prepareRow(row); // This line is necessary to prepare the rows and get the row props from react-table dynamically
+
+          // Each row can be rendered directly as a string using the react-table render method
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
