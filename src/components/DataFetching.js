@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { Table } from "./Table";
 import "../styles/table.scss";
-import Table from "./Table";
 
 export const DataFetching = () => {
-  // data state to store the CMC API data. Its initial value is an empty array
+  // data state to store the CMC API data. It's initial value is an empty array
 
   const [data, setData] = useState([]);
 
