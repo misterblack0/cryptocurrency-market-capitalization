@@ -19,6 +19,8 @@ const DataFetching = () => {
       .get(apiUrl, config)
       .then((res) => {
         setResponseData(res.data.data);
+        
+        
       })
       .catch((err) => {
         console.log(err);
@@ -33,8 +35,8 @@ const DataFetching = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(responseData[1].quote.USD.price);
-
+console.log(responseData);
+  
   return (
     <div>
       <ul>

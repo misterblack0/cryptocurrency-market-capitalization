@@ -1,11 +1,11 @@
 import React from "react";
-import { BasicTable } from "./BasicTable";
+import {Test} from "./Test";
 import DataFetching from "./DataFetching";
 
 const App = () => (
   <>
-  {/* <BasicTable/> */}
-    <DataFetching />
+  <Test/>
+   {/*  <DataFetching /> */}
   </>
 );
 

@@ -1,21 +1,13 @@
 import React from "react";
 import { useEffect, useState, useMemo } from "react";
-import { useTable } from "react-table";
-/* import { columns } from "./columns"; */
 import axios from "axios";
 import "../styles/table.scss";
+import Table from "./Table";
 
-export const BasicTable = () => {
-
-
-  ////////////////////////////////////////////////////////////////////////////////////////////
-    
-
-
-
+export const Test = () => {
   ////////////////////////////////////////////////////////////////////////////////////////////
 
-  const [responseData, setResponseData] = useState([]);
+  const [data, setData] = useState([]);
 
   const apiGetData = () => {
     const apiUrl =
@@ -29,7 +21,7 @@ export const BasicTable = () => {
     axios
       .get(apiUrl, config)
       .then((res) => {
-        setResponseData(res.data.data);
+        setData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -44,10 +36,44 @@ export const BasicTable = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(responseData);
+  ////////////////////////////////////////////////////////////////////////////////////////////
 
+  const columns = useMemo(() => [
+    {
+      Header: "Id",
+      accessor: "data.id",
+    },
+    {
+      Header: "Name",
+      accessor: "data.name",
+    },
+    {
+      Header: "Price",
+      accessor: "data.quote.USD.price",
+    },
+    {
+      Header: "24H",
+      accessor: "data.quote.USD.percent_change_24h",
+    },
+    {
+      Header: "7d",
+      accessor: "data.quote.USD.percent_change_7d",
+    },
+    {
+      Header: "Market Cap",
+      accessor: "data.quote.USD.market_cap",
+    },
+    {
+      Header: "Volume",
+      accessor: "volume_24h.quote.USD.percent_change_24h",
+    },
+    {
+      Header: "Circulating Supply",
+      accessor: "data.circulating_supply",
+    },
+  ]);
 
-  const column = useMemo(() => columns, []);
+  /* const column = useMemo(() => columns, []);
   const data = useMemo(() => responseData, []);
 
   const tableInstance = useTable({
@@ -61,12 +87,13 @@ export const BasicTable = () => {
     headerGroups,
     rows,
     prepareRow,
-  } = tableInstance;
-
-
+  } = tableInstance; */
 
   return (
-    {/* <table {...getTableProps()}>
+    <div>
+      <Table columns={columns} data={data} />
+    </div>
+    /* <table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -90,6 +117,6 @@ export const BasicTable = () => {
           );
         })}
       </tbody>
-    </table> */}
+    </table> */
   );
 };
