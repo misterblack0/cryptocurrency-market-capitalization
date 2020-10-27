@@ -45,6 +45,14 @@ export const DataFetching = () => {
   const options = { style: "currency", currency: "USD" };
   const numberFormat = new Intl.NumberFormat("en-US", options);
 
+  // Format data into a percentage value
+
+  function percentFormat(x){
+    const options1 = {style: 'percent', minimumFractionDigits:2};
+    return (x/100).toLocaleString("en-US", options1);
+  }
+
+
   // React-table columns logic
 
   const columns = useMemo(() => [
@@ -64,6 +72,7 @@ export const DataFetching = () => {
     {
       Header: "7d",
       accessor: "quote.USD.percent_change_7d",
+      Cell: (props) => percentFormat(props.value),
     },
     {
       Header: "Market Cap",
