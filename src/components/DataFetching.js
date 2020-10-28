@@ -40,10 +40,26 @@ export const DataFetching = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Format data in a currency value for the price, with 
+
+  const priceFormat = (num) => {
+    const options = {
+      style: "currency",
+      currency: "USD",
+      /* maximumFractionDigits: 6, */
+    };
+    return new Intl.NumberFormat("en-US", options).format(num);
+  };
+
   // Format data in a currency value
 
   const currencyFormat = (num) => {
-    const options = { style: "currency", currency: "USD" };
+    const options = {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    };
     return new Intl.NumberFormat("en-US", options).format(num);
   };
 
@@ -71,7 +87,7 @@ export const DataFetching = () => {
     {
       Header: "Price",
       accessor: "quote.USD.price",
-      Cell: (props) => currencyFormat(props.value),
+      Cell: (props) => priceFormat(props.value),
     },
     {
       Header: "24H",
