@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useFilters, useSortBy, useTable } from "react-table";
+import { useTable, useFilters, useSortBy, usePagination } from "react-table";
 
 export const Table = ({ columns, data }) => {
   // Create a state for filter
@@ -17,27 +17,40 @@ export const Table = ({ columns, data }) => {
     getTableProps, // table props from react-table
     getTableBodyProps, // table body props from react-table
     headerGroups, // headerGroups, if your table has groupings
-    rows, // rows for the table based on the data passed
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    setPageSize,
+    state,
     prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
-    setFilter, // The useFilter Hook provides a way to set the filter
+    setFilter, // The Hook that provides a way to set the filter
   } = useTable(
     {
       columns,
       data,
+      initialState: { pageIndex: 0 },
     },
     useFilters, // Plugin Hook to search through name column
-    useSortBy //Plugin Hook to sort our table columns
+    useSortBy, //Plugin Hook to sort through table columns
+    usePagination
   );
 
   // Render the UI for the table
   // react-table doesn't have UI, it's headless. You just need to put the react-table props from the Hooks, and it will do its magic automatically
+
+  const { pageIndex, pageSize } = state;
 
   return (
     <div>
       <input
         value={filterInput}
         onChange={handleFilterChange}
-        placeholder={"Search name"}
+        placeholder={"Search"}
       />
       <table {...getTableProps()}>
         <thead>
@@ -61,7 +74,7 @@ export const Table = ({ columns, data }) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row); // This line is necessary to prepare the rows and get the row props from react-table dynamically
 
             // Each row can be rendered directly as a string using the react-table render method
@@ -77,6 +90,49 @@ export const Table = ({ columns, data }) => {
           })}
         </tbody>
       </table>
+      <div>
+        <span>
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <span>
+          |Go to page:{" "}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const pageNumber = e.target.value
+                ? Number(e.target.value) - 1
+                : 0;
+              gotoPage(pageNumber);
+            }}
+          />
+        </span>
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 25, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </button>
+      </div>
     </div>
   );
 };

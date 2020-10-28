@@ -40,7 +40,7 @@ export const DataFetching = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Format data in a currency value for the price, with 
+  // Format data in a currency value for the price, with
 
   const priceFormat = (num) => {
     const options = {
@@ -81,38 +81,42 @@ export const DataFetching = () => {
 
   const columns = useMemo(() => [
     {
+      Header: "ID",
+      accessor: "id",
+    },
+    {
       Header: "Name",
       accessor: "name",
     },
     {
       Header: "Price",
       accessor: "quote.USD.price",
-      Cell: (props) => priceFormat(props.value),
+      Cell: ({ value }) => priceFormat(value),
     },
     {
       Header: "24H",
       accessor: "quote.USD.percent_change_24h",
-      Cell: (props) => percentageFormat(props.value),
+      Cell: ({ value }) => percentageFormat(value),
     },
     {
       Header: "7d",
       accessor: "quote.USD.percent_change_7d",
-      Cell: (props) => percentageFormat(props.value),
+      Cell: ({ value }) => percentageFormat(value),
     },
     {
       Header: "Market Cap",
       accessor: "quote.USD.market_cap",
-      Cell: (props) => currencyFormat(props.value),
+      Cell: ({ value }) => currencyFormat(value),
     },
     {
       Header: "Volume",
       accessor: "quote.USD.volume_24h",
-      Cell: (props) => currencyFormat(props.value),
+      Cell: ({ value }) => currencyFormat(value),
     },
     {
       Header: "Circulating Supply",
       accessor: "circulating_supply",
-      Cell: (props) => numberFormat(props.value),
+      Cell: ({ value }) => numberFormat(value),
     },
   ]);
 
