@@ -40,18 +40,26 @@ export const DataFetching = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Format data into a currency value
+  // Format data in a currency value
 
-  const options = { style: "currency", currency: "USD" };
-  const numberFormat = new Intl.NumberFormat("en-US", options);
+  const currencyFormat = (num) => {
+    const options = { style: "currency", currency: "USD" };
+    return new Intl.NumberFormat("en-US", options).format(num);
+  };
 
-  // Format data into a percentage value
+  // Format data in a percentage value
 
-  function percentFormat(x){
-    const options1 = {style: 'percent', minimumFractionDigits:2};
-    return (x/100).toLocaleString("en-US", options1);
-  }
+  const percentageFormat = (num) => {
+    const options = { style: "percent", minimumFractionDigits: 2 };
+    return (num / 100).toLocaleString("en-US", options);
+  };
 
+  // Format data in a number value with a minimum number of significant digits
+
+  const numberFormat = (num) => {
+    const options = { minimumSignificantDigits: 1 };
+    return new Intl.NumberFormat("en-US", options).format(num);
+  };
 
   // React-table columns logic
 
@@ -63,30 +71,32 @@ export const DataFetching = () => {
     {
       Header: "Price",
       accessor: "quote.USD.price",
-      Cell: (props) => numberFormat.format(props.value),
+      Cell: (props) => currencyFormat(props.value),
     },
     {
       Header: "24H",
       accessor: "quote.USD.percent_change_24h",
+      Cell: (props) => percentageFormat(props.value),
     },
     {
       Header: "7d",
       accessor: "quote.USD.percent_change_7d",
-      Cell: (props) => percentFormat(props.value),
+      Cell: (props) => percentageFormat(props.value),
     },
     {
       Header: "Market Cap",
       accessor: "quote.USD.market_cap",
-      Cell: (props) => numberFormat.format(props.value),
+      Cell: (props) => currencyFormat(props.value),
     },
     {
       Header: "Volume",
       accessor: "quote.USD.volume_24h",
-      Cell: (props) => numberFormat.format(props.value),
+      Cell: (props) => currencyFormat(props.value),
     },
     {
       Header: "Circulating Supply",
       accessor: "circulating_supply",
+      Cell: (props) => numberFormat(props.value),
     },
   ]);
 
