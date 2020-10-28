@@ -94,7 +94,7 @@ export const Table = ({ columns, data }) => {
         <span>
           Page{" "}
           <strong>
-            {pageIndex + 1} of {pageOptions.length}
+            {pageIndex + 1} out of {pageOptions.length}
           </strong>{" "}
         </span>
         <span>
@@ -110,13 +110,14 @@ export const Table = ({ columns, data }) => {
             }}
           />
         </span>
+        <span>Show rows</span>
         <select
           value={pageSize}
           onChange={(e) => setPageSize(Number(e.target.value))}
         >
           {[10, 25, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
-              Show {pageSize}
+              {pageSize}
             </option>
           ))}
         </select>
