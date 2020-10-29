@@ -2,23 +2,29 @@ import React from "react";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Table } from "./Table";
+import {
+  priceFormat,
+  currencyFormat,
+  percentageFormat,
+  numberFormat,
+} from "./dataFormat";
 import "../styles/table.scss";
 
 export const DataFetching = () => {
-  // data state to store the CMC API data. It's initial value is an empty array
-
-  const [cryptoData, setCryptoData] = useState([]);
-  const [globalMetrics, setGlobalMetrics] = useState([]);
+  const [cryptocurrenciesData, setCryptocurrenciesData] = useState([]);
+  const [globalData, setglobalData] = useState([]);
+  const [exchangesData, setExchangesData] = useState([]);
+  const [derivativesData, setDerivativesData] = useState([]);
+  const [derivativesExchanges, setDerivativesExchanges] = useState([]);
+  const [exchangeRates, setExchangeRates] = useState([]); //BTC-to-Currency exchange rates
 
   // API mount call configuration
 
   const fetchData = () => {
-    const cryptoApi =
-      "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    const cryptocurrenciesApi =
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc";
 
-    const metricsApi =
-      "https://sandbox-api.coinmarketcap.com/v1/global-metrics/quotes/latest";
-    // In production change the URL from "sandbox-api" to "pro-api" and change the api key from .env
+    const globalDataApi = "https://api.coingecko.com/api/v3/global";
 
     const config = {
       headers: {
@@ -26,16 +32,16 @@ export const DataFetching = () => {
       },
     };
 
-    const getCryptoData = axios.get(cryptoApi, config);
-    const getMetricsData = axios.get(metricsApi, config);
+    const getCryptocurrenciesData = axios.get(cryptocurrenciesApi, config);
+    const getMetricsData = axios.get(globalDataApi, config);
 
-    axios.all([getCryptoData, getMetricsData]).then(
+    axios.all([getCryptocurrenciesData, getMetricsData]).then(
       axios.spread((...allData) => {
-        const cryptoData = allData[0].data.data;
+        const cryptocurrenciesData = allData[0].data;
         const metricsData = allData[1].data.data;
 
-        setCryptoData(cryptoData);
-        setGlobalMetrics(metricsData);
+        setCryptocurrenciesData(cryptocurrenciesData);
+        setglobalData(metricsData);
       })
     );
   };
@@ -50,50 +56,12 @@ export const DataFetching = () => {
     return () => clearInterval(interval); */
   }, []);
 
-  // Format data in a currency value for the price, with fraction digits ---------work in progress----------
-
-  const priceFormat = (num) => {
-    const options = {
-      style: "currency",
-      currency: "USD",
-      /* maximumFractionDigits: 6, */
-    };
-    return new Intl.NumberFormat("en-US", options).format(num);
-  };
-
-  // Format data in a currency value
-
-  const currencyFormat = (num) => {
-    const options = {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    };
-    return new Intl.NumberFormat("en-US", options).format(num);
-  };
-
-  // Format data in a percentage value
-
-  const percentageFormat = (num) => {
-    const options = { style: "percent", minimumFractionDigits: 2 };
-    // num < 0 ? to implement red color style on "< 0" number and green on "0 >" number
-    return (num / 100).toLocaleString("en-US", options);
-  };
-
-  // Format data in a number value with a minimum number of significant digits
-
-  const numberFormat = (num) => {
-    const options = { maximumFractionDigits: 0 };
-    return new Intl.NumberFormat("en-US", options).format(num);
-  };
-
   // React-table columns logic
 
   const columns = useMemo(() => [
     {
       Header: "#",
-      accessor: "id",
+      accessor: "market_cap_rank",
     },
     {
       Header: "Name",
@@ -101,27 +69,27 @@ export const DataFetching = () => {
     },
     {
       Header: "Price",
-      accessor: "quote.USD.price",
+      accessor: "current_price",
       Cell: ({ value }) => priceFormat(value),
     },
     {
       Header: "24h",
-      accessor: "quote.USD.percent_change_24h",
+      accessor: "price_change_percentage_24h",
       Cell: ({ value }) => percentageFormat(value),
     },
     {
-      Header: "7d",
-      accessor: "quote.USD.percent_change_7d",
-      Cell: ({ value }) => percentageFormat(value),
+      Header: "ATH",
+      accessor: "ath",
+      Cell: ({ value }) => priceFormat(value),
     },
     {
       Header: "Market Cap",
-      accessor: "quote.USD.market_cap",
+      accessor: "market_cap",
       Cell: ({ value }) => currencyFormat(value),
     },
     {
       Header: "24h Volume",
-      accessor: "quote.USD.volume_24h",
+      accessor: "total_volume",
       Cell: ({ value }) => currencyFormat(value),
     },
     {
@@ -131,11 +99,13 @@ export const DataFetching = () => {
     },
   ]);
 
-  console.log(globalMetrics);
+  console.log(globalData);
 
   return (
     <div>
-      <Table columns={columns} data={cryptoData} />
+      <span>Cryptocurrencies: {globalData.active_cryptocurrencies}</span>
+      {/* <span>BTC Dominance: {globalMetrics.market_cap_percentage.btc}</span> */}
+      <Table columns={columns} data={cryptocurrenciesData} />
     </div>
   );
 };
