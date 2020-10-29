@@ -34,10 +34,10 @@ export const DataFetching = () => {
 
   useEffect(() => {
     apiGetData();
-    const interval = setInterval(() => {
+    /* const interval = setInterval(() => { // If you want to use an interval to update the data from the API
       apiGetData();
     }, 15000);
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); */
   }, []);
 
   // Format data in a currency value for the price, with
