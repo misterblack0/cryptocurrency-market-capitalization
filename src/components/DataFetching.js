@@ -21,10 +21,19 @@ export const DataFetching = () => {
   // API mount call configuration
 
   const fetchData = () => {
-    const cryptocurrenciesApi =
+    const cryptocurrenciesDataApi =
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc";
 
     const globalDataApi = "https://api.coingecko.com/api/v3/global";
+
+    const exchangesDataApi = "https://api.coingecko.com/api/v3/exchanges";
+
+    const derivativesDataApi = "https://api.coingecko.com/api/v3/derivatives";
+
+    const derivativesExchangesApi =
+      "https://api.coingecko.com/api/v3/derivatives/exchanges";
+
+    const exchangeRatesApi = "https://api.coingecko.com/api/v3/exchange_rates";
 
     const config = {
       headers: {
@@ -32,16 +41,21 @@ export const DataFetching = () => {
       },
     };
 
-    const getCryptocurrenciesData = axios.get(cryptocurrenciesApi, config);
-    const getMetricsData = axios.get(globalDataApi, config);
+    const getCryptocurrenciesData = axios.get(cryptocurrenciesDataApi, config);
+    const getGlobalData = axios.get(globalDataApi, config);
+    const getExchangesData = axios.get(exchangesDataApi, config);
+    const getDerivativesData = axios.get(derivativesDataApi, config);
+    const getDerivativesExchanges = axios.get(derivativesExchangesApi, config);
+    const getExchangeRates = axios.get(exchangeRatesApi, config);
 
-    axios.all([getCryptocurrenciesData, getMetricsData]).then(
+    axios.all([getCryptocurrenciesData, getGlobalData, getExchangesData, getDerivativesData, getDerivativesExchanges, getExchangeRates]).then(
       axios.spread((...allData) => {
         const cryptocurrenciesData = allData[0].data;
-        const metricsData = allData[1].data.data;
+        const globalData = allData[1].data.data;
+        
 
         setCryptocurrenciesData(cryptocurrenciesData);
-        setglobalData(metricsData);
+        setglobalData(globalData);
       })
     );
   };
