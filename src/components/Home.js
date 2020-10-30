@@ -10,7 +10,7 @@ import {
 } from "./dataFormat";
 import "../styles/table.scss";
 
-export const Home = () => {
+const Home = () => {
   const [cryptocurrenciesData, setCryptocurrenciesData] = useState([]);
   const [globalData, setglobalData] = useState([]);
 
@@ -98,3 +98,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;

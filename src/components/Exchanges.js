@@ -10,7 +10,7 @@ import {
 } from "./dataFormat";
 import "../styles/table.scss";
 
-export const Exchanges = () => {
+const Exchanges = () => {
   const [exchangesData, setExchangesData] = useState([]);
   const [derivativesData, setDerivativesData] = useState([]);
   const [derivativesExchanges, setDerivativesExchanges] = useState([]);
@@ -72,9 +72,13 @@ export const Exchanges = () => {
       accessor: "trust_score",
       Cell: ({ value }) => numberFormat(value),
     },
+    {
+        Header: "Launched",
+        accessor: "year_established",
+      },
   ]);
 
-console.log(exchangesData);
+  console.log(exchangesData);
 
   return (
     <div>
@@ -83,3 +87,5 @@ console.log(exchangesData);
     </div>
   );
 };
+
+export default Exchanges;

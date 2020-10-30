@@ -1,17 +1,17 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const Nav = () => (
+const Nav = () => (
   <nav>
-      <h3>Logo</h3>
-      <ul>
-    <Link to="/">
+    <h3>Logo</h3>
+    <ul>
+      <Link to="/">
         <li>Cryptocurrencies</li>
-    </Link>
-    <Link to="/exchanges">
+      </Link>
+      <Link to="/exchanges">
         <li>Exchanges</li>
-    </Link>
-      </ul>
+      </Link>
+    </ul>
   </nav>
 );
 
