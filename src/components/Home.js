@@ -10,13 +10,9 @@ import {
 } from "./dataFormat";
 import "../styles/table.scss";
 
-export const DataFetching = () => {
+export const Home = () => {
   const [cryptocurrenciesData, setCryptocurrenciesData] = useState([]);
   const [globalData, setglobalData] = useState([]);
-  const [exchangesData, setExchangesData] = useState([]);
-  const [derivativesData, setDerivativesData] = useState([]);
-  const [derivativesExchanges, setDerivativesExchanges] = useState([]);
-  const [exchangeRates, setExchangeRates] = useState([]); //BTC-to-Currency exchange rates
 
   // API mount call configuration
 
@@ -25,16 +21,6 @@ export const DataFetching = () => {
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc";
 
     const globalDataApi = "https://api.coingecko.com/api/v3/global";
-
-    const exchangesDataApi = "https://api.coingecko.com/api/v3/exchanges";
-
-    const derivativesDataApi = "https://api.coingecko.com/api/v3/derivatives";
-
-    const derivativesExchangesApi =
-      "https://api.coingecko.com/api/v3/derivatives/exchanges";
-
-    const exchangeRatesApi = "https://api.coingecko.com/api/v3/exchange_rates";
-
     const config = {
       headers: {
         "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
@@ -43,29 +29,16 @@ export const DataFetching = () => {
 
     const getCryptocurrenciesData = axios.get(cryptocurrenciesDataApi, config);
     const getGlobalData = axios.get(globalDataApi, config);
-    const getExchangesData = axios.get(exchangesDataApi, config);
-    const getDerivativesData = axios.get(derivativesDataApi, config);
-    const getDerivativesExchanges = axios.get(derivativesExchangesApi, config);
-    const getExchangeRates = axios.get(exchangeRatesApi, config);
 
-    axios
-      .all([
-        getCryptocurrenciesData,
-        getGlobalData,
-        getExchangesData,
-        getDerivativesData,
-        getDerivativesExchanges,
-        getExchangeRates,
-      ])
-      .then(
-        axios.spread((...allData) => {
-          const cryptocurrenciesData = allData[0].data;
-          const globalData = allData[1].data.data;
+    axios.all([getCryptocurrenciesData, getGlobalData]).then(
+      axios.spread((...allData) => {
+        const cryptocurrenciesData = allData[0].data;
+        const globalData = allData[1].data.data;
 
-          setCryptocurrenciesData(cryptocurrenciesData);
-          setglobalData(globalData);
-        })
-      );
+        setCryptocurrenciesData(cryptocurrenciesData);
+        setglobalData(globalData);
+      })
+    );
   };
 
   // Using useEffect to call the API once mounted and set the data
@@ -116,8 +89,6 @@ export const DataFetching = () => {
       Cell: ({ value }) => numberFormat(value),
     },
   ]);
-
-  console.log(globalData);
 
   return (
     <div>

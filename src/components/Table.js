@@ -33,7 +33,7 @@ export const Table = ({ columns, data }) => {
     {
       columns,
       data,
-      initialState: { pageIndex: 0, pageSize: 50 },
+      initialState: { pageIndex: 0, pageSize: 20 },
     },
     useFilters, // Plugin Hook to search through name column
     useSortBy, //Plugin Hook to sort through table columns
