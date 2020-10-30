@@ -68,6 +68,19 @@ export const DataFetching = () => {
       );
   };
 
+  // Fetch only from one api
+
+  /* const fetchData = () => {
+  axios
+    .get("https://api.coingecko.com/api/v3/exchanges")
+    .then((res) => {
+      setExchangesData(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}; */
+
   // Using useEffect to call the API once mounted and set the data
 
   useEffect(() => {

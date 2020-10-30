@@ -12,33 +12,20 @@ import "../styles/table.scss";
 
 const Home = () => {
   const [cryptocurrenciesData, setCryptocurrenciesData] = useState([]);
-  const [globalData, setglobalData] = useState([]);
 
   // API mount call configuration
 
   const fetchData = () => {
-    const cryptocurrenciesDataApi =
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc";
-
-    const globalDataApi = "https://api.coingecko.com/api/v3/global";
-    const config = {
-      headers: {
-        "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
-      },
-    };
-
-    const getCryptocurrenciesData = axios.get(cryptocurrenciesDataApi, config);
-    const getGlobalData = axios.get(globalDataApi, config);
-
-    axios.all([getCryptocurrenciesData, getGlobalData]).then(
-      axios.spread((...allData) => {
-        const cryptocurrenciesData = allData[0].data;
-        const globalData = allData[1].data.data;
-
-        setCryptocurrenciesData(cryptocurrenciesData);
-        setglobalData(globalData);
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc"
+      )
+      .then((res) => {
+        setCryptocurrenciesData(res.data);
       })
-    );
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // Using useEffect to call the API once mounted and set the data
@@ -92,8 +79,6 @@ const Home = () => {
 
   return (
     <div>
-      <span>Cryptocurrencies: {globalData.active_cryptocurrencies}</span>
-      {/* <span>BTC Dominance: {globalMetrics.market_cap_percentage.btc}</span> */}
       <Table columns={columns} data={cryptocurrenciesData} />
     </div>
   );
