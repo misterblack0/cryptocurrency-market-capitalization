@@ -7,9 +7,10 @@ import DefiData from "./DefiData";
 
 const App = () => (
   <Router>
-  <DefiData/>
+  
     <Nav />
     <Switch>
+    <Route path="/defi" exact component={DefiData} />
       <Route path="/" exact component={Home} />
       <Route path="/exchanges" exact component={Exchanges} />
     </Switch>

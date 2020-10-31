@@ -11,6 +11,9 @@ const Nav = () => (
       <Link to="/exchanges">
         <li>Exchanges</li>
       </Link>
+      <Link to="/defi">
+        <li>DeFi</li>
+      </Link>
     </ul>
   </nav>
 );
