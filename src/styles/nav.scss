@@ -1,0 +1,15 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+
+  & ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: red;
+
+    & li {
+     
+    }
+  }
+}
