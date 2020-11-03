@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import numberFormat from "./dataFormat.js";
 import "../styles/globalMetrics.scss";
 
 const GlobalMetrics = () => {
@@ -10,7 +11,7 @@ const GlobalMetrics = () => {
 
   const fetchData = () => {
     const globalDataApi =
-      "https://sandbox-api.coinmarketcap.com/v1/global-metrics/quotes/latest";
+      "https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest";
     const config = {
       headers: {
         "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
@@ -33,11 +34,9 @@ const GlobalMetrics = () => {
     fetchData();
   }, []);
 
-  console.log(globalData);
-
   return (
     <div className="container">
-      <span>Cryptocurrencies: {globalData.active_cryptocurrencies}</span>
+      <span>Cryptocurrencies: numberFormat{globalData.total_cryptocurrencies}</span>
       <span>BTC Dominance: {globalData.btc_dominance}</span>
       <span>Exchanges: {globalData.active_exchanges}</span>
       {/*     <span>Market Cap: {globalData.quote.USD.total_market_cap}</span>
