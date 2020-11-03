@@ -36,7 +36,7 @@ const GlobalMetrics = () => {
 
   return (
     <div className="container">
-      <span>Cryptocurrencies: numberFormat{globalData.total_cryptocurrencies}</span>
+      <span>Cryptocurrencies: {globalData.total_cryptocurrencies}</span>
       <span>BTC Dominance: {globalData.btc_dominance}</span>
       <span>Exchanges: {globalData.active_exchanges}</span>
       {/*     <span>Market Cap: {globalData.quote.USD.total_market_cap}</span>

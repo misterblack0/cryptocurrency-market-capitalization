@@ -45,7 +45,7 @@ const Home = () => {
   const columns = useMemo(() => [
     {
       Header: "#",
-      accessor: "market_cap_rank",
+      accessor: "cmc_rank",
     },
     {
       Header: "Name",

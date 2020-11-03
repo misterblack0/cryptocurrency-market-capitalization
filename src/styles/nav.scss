@@ -7,10 +7,11 @@ nav {
     list-style: none;
     display: flex;
     
-    background-color: red;
-
+  
     & li {
-     
+      font-size: 1.5rem;
+      font-weight: 800;
+     color: #000;
     }
   }
 }
