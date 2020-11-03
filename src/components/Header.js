@@ -8,8 +8,8 @@ import DefiData from "./DefiData";
 
 const Header = () => (
   <Router>
-    <Nav />
     <GlobalMetrics />
+    <Nav />
     <Switch>
       <Route path="/defi" exact component={DefiData} />
       <Route path="/" exact component={Home} />

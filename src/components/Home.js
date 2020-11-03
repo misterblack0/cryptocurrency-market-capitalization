@@ -16,12 +16,18 @@ const Home = () => {
   // API mount call configuration
 
   const fetchData = () => {
+    const cryptocurrenciesDataApi =
+      "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    const config = {
+      headers: {
+        "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
+      },
+    };
+
     axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc"
-      )
+      .get(cryptocurrenciesDataApi, config)
       .then((res) => {
-        setCryptocurrenciesData(res.data);
+        setCryptocurrenciesData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -47,27 +53,27 @@ const Home = () => {
     },
     {
       Header: "Price",
-      accessor: "current_price",
+      accessor: "quote.USD.price",
       Cell: ({ value }) => priceFormat(value),
     },
     {
       Header: "24h",
-      accessor: "price_change_percentage_24h",
+      accessor: "quote.USD.percent_change_24h",
       Cell: ({ value }) => percentageFormat(value),
     },
     {
-      Header: "ATH",
-      accessor: "ath",
-      Cell: ({ value }) => priceFormat(value),
+      Header: "7d",
+      accessor: "quote.USD.percent_change_7d",
+      Cell: ({ value }) => percentageFormat(value),
     },
     {
       Header: "Market Cap",
-      accessor: "market_cap",
+      accessor: "quote.USD.market_cap",
       Cell: ({ value }) => currencyFormat(value),
     },
     {
       Header: "24h Volume",
-      accessor: "total_volume",
+      accessor: "quote.USD.volume_24h",
       Cell: ({ value }) => currencyFormat(value),
     },
     {

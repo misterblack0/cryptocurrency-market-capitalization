@@ -3,9 +3,10 @@ nav {
   justify-content: space-between;
 
   & ul {
+    width: 80%;
     list-style: none;
     display: flex;
-    justify-content: space-evenly;
+    
     background-color: red;
 
     & li {
