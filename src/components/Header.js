@@ -7,15 +7,17 @@ import Exchanges from "./Exchanges";
 import DefiData from "./DefiData";
 
 const Header = () => (
-  <Router>
+  <div>
     <GlobalMetrics />
-    <Nav />
-    <Switch>
-      <Route path="/defi" exact component={DefiData} />
-      <Route path="/" exact component={Home} />
-      <Route path="/exchanges" exact component={Exchanges} />
-    </Switch>
-  </Router>
+    <Router>
+      <Nav />
+      <Switch>
+        <Route path="/defi" exact component={DefiData} />
+        <Route path="/" exact component={Home} />
+        <Route path="/exchanges" exact component={Exchanges} />
+      </Switch>
+    </Router>
+  </div>
 );
 
 export default Header;

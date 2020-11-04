@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useTable, useFilters, useSortBy, usePagination } from "react-table";
+const classNames = require("classnames");
 
 export const Table = ({ columns, data }) => {
   // Create a state for filter
@@ -113,16 +114,29 @@ export const Table = ({ columns, data }) => {
           />
         </span> */}
         <div>
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          <button
+            className="btn btn-primary"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
             {"<<"}
           </button>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Prev page
-          </button>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            Next Page
+          <button
+            className="btn btn-primary"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
+            {"<"}
           </button>
           <button
+            className="btn btn-primary"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
+            {">"}
+          </button>
+          <button
+            className="btn btn-primary"
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
           >
@@ -130,7 +144,7 @@ export const Table = ({ columns, data }) => {
           </button>
         </div>
         <div className="page-size">
-          <span>Show rows</span>
+          <span>Rows per page:</span>
           <select
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}

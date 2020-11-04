@@ -6,25 +6,20 @@ table {
 
 table td,
 table th {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #eff2f5;
   padding: 8px;
   text-align: center;
 }
 
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 table tr:hover {
-  background-color: #ddd;
+  background-color: #f8fafd;
 }
 
 table th {
+  border-top: 1px solid #eff2f5;
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #4caf50;
-  color: white;
 }
 
 .pagination {
@@ -32,5 +27,26 @@ table th {
   justify-content: space-between;
 }
 
-.page-size {
+.btn {
+  display: inline-block;
+  padding: 6px 12px 5px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border-color: transparent;
+  cursor: pointer;
+  margin: 0.1rem;
+  outline: none;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background: #2e7ad0;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
