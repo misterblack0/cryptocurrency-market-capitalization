@@ -16,10 +16,18 @@ const Exchanges = () => {
   // API mount call configuration
 
   const fetchData = () => {
+    const exchangesDataApi =
+      "https://sandbox-api.coinmarketcap.com/v1/exchange/listings/latest";
+    const config = {
+      headers: {
+        "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
+      },
+    };
+
     axios
-      .get("https://api.coingecko.com/api/v3/exchanges")
+      .get(exchangesDataApi, config)
       .then((res) => {
-        setExchangesData(res.data);
+        setExchangesData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -58,7 +66,6 @@ const Exchanges = () => {
 
   return (
     <div>
-      <h1>test</h1>
       <Table columns={columns} data={exchangesData} />
     </div>
   );

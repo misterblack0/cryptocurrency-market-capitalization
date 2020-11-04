@@ -11,7 +11,7 @@ const GlobalMetrics = () => {
 
   const fetchData = () => {
     const globalDataApi =
-      "https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest";
+      "https://sandbox-api.coinmarketcap.com/v1/global-metrics/quotes/latest";
     const config = {
       headers: {
         "X-CMC_PRO_API_KEY": process.env.REACT_APP_API_KEY,
