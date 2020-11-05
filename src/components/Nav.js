@@ -12,9 +12,6 @@ const Nav = () => (
       <Link to="/exchanges" style={{ textDecoration: "none" }}>
         <li>Exchanges</li>
       </Link>
-      <Link to="/defi" style={{ textDecoration: "none" }}>
-        <li>DeFi</li>
-      </Link>
     </ul>
   </nav>
 );

@@ -6,6 +6,7 @@ import "../styles/globalMetrics.scss";
 
 const GlobalMetrics = () => {
   const [globalData, setGlobalData] = useState([]);
+  const [defiData, setdefiData] = useState([]);
 
   // API mount call configuration
 
@@ -34,15 +35,13 @@ const GlobalMetrics = () => {
     fetchData();
   }, []);
 
+  console.log(globalData.total_cryptocurrencies);
+
   return (
     <div className="container">
-      <span>Cryptocurrencies: {globalData.total_cryptocurrencies}</span>
+      <span>Cryptocurrencies: {globalData.active_cryptocurrencies}</span>
       <span>BTC Dominance: {globalData.btc_dominance}</span>
       <span>Exchanges: {globalData.active_exchanges}</span>
-      {/*     <span>Market Cap: {globalData.quote.USD.total_market_cap}</span>
-    <span>24h Vol: {globalData.quote.USD.total_volume_24h}</span>
-    <span>Altcoins Market Cap: {globalData.quote.USD.altcoin_market_cap}</span>
-    <span>Altcoins 24h Vol: {globalData.quote.USD.altcoin_volume_24h}</span> */}
     </div>
   );
 };

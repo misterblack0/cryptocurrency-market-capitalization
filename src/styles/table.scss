@@ -29,17 +29,17 @@ table th {
 .pagination {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 2rem 0;
 }
 
 .btn {
   display: inline-block;
-  padding: 6px 12px 5px;
-  font-size: 13px;
+  padding: 1rem 1.2rem;
   font-weight: 600;
   letter-spacing: normal;
   text-transform: uppercase;
-  border-radius: 3px;
+  border-radius: 0.8rem;
   border-color: transparent;
   cursor: pointer;
   margin: 0.1rem;
@@ -50,7 +50,7 @@ table th {
   color: #ffffff;
   background: #2e7ad0;
   border: 1px solid transparent;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;

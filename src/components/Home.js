@@ -91,8 +91,6 @@ const Home = () => {
     },
   ]);
 
-  console.log(cryptocurrenciesData);
-
   return (
     <div>
       <Table columns={columns} data={cryptocurrenciesData} />

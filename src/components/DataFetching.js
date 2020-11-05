@@ -132,11 +132,5 @@ export const DataFetching = () => {
 
   console.log(globalData);
 
-  return (
-    <div>
-      <span>Cryptocurrencies: {globalData.active_cryptocurrencies}</span>
-      {/* <span>BTC Dominance: {globalMetrics.market_cap_percentage.btc}</span> */}
-      <Table columns={columns} data={cryptocurrenciesData} />
-    </div>
-  );
+  return <div></div>;
 };
