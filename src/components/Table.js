@@ -57,23 +57,6 @@ export const Table = ({ columns, data }) => {
             onChange={handleFilterChange}
             placeholder={"Search"}
           />
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            height="16px"
-            width="16px"
-            viewBox="0 0 24 24"
-            class="Box-sc-16r8icm-0 dLcfZ"
-          >
-            <path
-              d="M16.4153 16.4153L20 20M18.5455 11.2727C18.5455 15.2893 15.2894 18.5454 11.2728 18.5454C7.25612 18.5454 4 15.2893 4 11.2727C4 7.2561 7.25612 4 11.2728 4C15.2894 4 18.5455 7.2561 18.5455 11.2727Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg> */}
         </div>
       </div>
       <table {...getTableProps()}>
@@ -183,8 +166,8 @@ export const Table = ({ columns, data }) => {
             {"»"}
           </button>
         </div>
-        <div className="page-size">
-          <span>Rows per page:</span>
+        <div className="page-size horizontal">
+          <span>Rows per page</span>
           <select
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}

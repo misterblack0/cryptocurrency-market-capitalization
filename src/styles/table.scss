@@ -29,6 +29,7 @@ table th {
 .pagination {
   display: flex;
   justify-content: space-between;
+  margin: 2rem 0;
 }
 
 .btn {
@@ -64,7 +65,7 @@ table th {
     height: 4rem;
     border: none;
     outline: none;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
     padding-left: 1.5rem;
     padding-right: 3rem;
     background: rgb(239, 242, 245) url(/static/img/search.svg) center right 10px
@@ -82,5 +83,22 @@ table th {
 
   & svg {
     position: absolute;
+  }
+}
+
+.page-size {
+  width: 12%;
+  align-items: center;
+
+  & select {
+    padding: 0.8rem;
+    border-radius: 0.8rem;
+    background: rgb(239, 242, 245);
+    border: none;
+    outline: none;
+  }
+
+  & option {
+    background: #fff;
   }
 }
