@@ -25,7 +25,6 @@ export const currencyFormat = (num) => {
 
 export const percentageFormat = (num) => {
   const options = { style: "percent", minimumFractionDigits: 2 };
-  // num < 0 ? to implement red color style on "< 0" number and green on "0 >" number
   return (num / 100).toLocaleString("en-US", options);
 };
 

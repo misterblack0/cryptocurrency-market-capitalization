@@ -1,5 +1,4 @@
 table {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -7,8 +6,13 @@ table {
 table td,
 table th {
   border-bottom: 1px solid #eff2f5;
-  padding: 8px;
+  padding: 3rem;
   text-align: center;
+  font-weight: 500;
+}
+
+th {
+  font-size: 1.3rem;
 }
 
 table tr:hover {
@@ -49,4 +53,34 @@ table th {
   line-height: 1.5;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.nav_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & input {
+    height: 4rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 3rem;
+    background: rgb(239, 242, 245) url(/static/img/search.svg) center right 10px
+      no-repeat;
+
+    &::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
+      color: rgb(166, 176, 195);
+    }
+    &::-moz-placeholder {
+      /* Firefox 19+ */
+      color: rgb(166, 176, 195);
+    }
+  }
+
+  & svg {
+    position: absolute;
+  }
 }

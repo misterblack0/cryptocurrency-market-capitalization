@@ -10,7 +10,6 @@ const Header = () => (
   <div>
     <GlobalMetrics />
     <Router>
-      <Nav />
       <Switch>
         <Route path="/defi" exact component={DefiData} />
         <Route path="/" exact component={Home} />

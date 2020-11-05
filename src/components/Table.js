@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useTable, useFilters, useSortBy, usePagination } from "react-table";
-const classNames = require("classnames");
+import Nav from "./Nav";
 
 export const Table = ({ columns, data }) => {
   // Create a state for filter
@@ -48,11 +48,34 @@ export const Table = ({ columns, data }) => {
 
   return (
     <div>
-      <input
-        value={filterInput}
-        onChange={handleFilterChange}
-        placeholder={"Search"}
-      />
+      <div className="nav_container">
+        <Nav />
+        <div className="search__container">
+          <input
+            className="search__field"
+            value={filterInput}
+            onChange={handleFilterChange}
+            placeholder={"Search"}
+          />
+          {/* <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            height="16px"
+            width="16px"
+            viewBox="0 0 24 24"
+            class="Box-sc-16r8icm-0 dLcfZ"
+          >
+            <path
+              d="M16.4153 16.4153L20 20M18.5455 11.2727C18.5455 15.2893 15.2894 18.5454 11.2728 18.5454C7.25612 18.5454 4 15.2893 4 11.2727C4 7.2561 7.25612 4 11.2728 4C15.2894 4 18.5455 7.2561 18.5455 11.2727Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg> */}
+        </div>
+      </div>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -76,6 +99,23 @@ export const Table = ({ columns, data }) => {
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              height="16px"
+              width="16px"
+              viewBox="0 0 24 24"
+              class="Box-sc-16r8icm-0 dLcfZ"
+            >
+              <path
+                d="M16.4153 16.4153L20 20M18.5455 11.2727C18.5455 15.2893 15.2894 18.5454 11.2728 18.5454C7.25612 18.5454 4 15.2893 4 11.2727C4 7.2561 7.25612 4 11.2728 4C15.2894 4 18.5455 7.2561 18.5455 11.2727Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>;
             prepareRow(row); // This line is necessary to prepare the rows and get the row props from react-table dynamically
 
             // Each row can be rendered directly as a string using the react-table render method
@@ -119,28 +159,28 @@ export const Table = ({ columns, data }) => {
             onClick={() => gotoPage(0)}
             disabled={!canPreviousPage}
           >
-            {"<<"}
+            {"«"}
           </button>
           <button
             className="btn btn-primary"
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
           >
-            {"<"}
+            {"« Prev page"}
           </button>
           <button
             className="btn btn-primary"
             onClick={() => nextPage()}
             disabled={!canNextPage}
           >
-            {">"}
+            {"Next page »"}
           </button>
           <button
             className="btn btn-primary"
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
           >
-            {">>"}
+            {"»"}
           </button>
         </div>
         <div className="page-size">

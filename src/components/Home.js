@@ -59,12 +59,20 @@ const Home = () => {
     {
       Header: "24h",
       accessor: "quote.USD.percent_change_24h",
-      Cell: ({ value }) => percentageFormat(value),
+      Cell: ({ value }) => (
+        <div style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+          {percentageFormat(value)}
+        </div>
+      ),
     },
     {
       Header: "7d",
       accessor: "quote.USD.percent_change_7d",
-      Cell: ({ value }) => percentageFormat(value),
+      Cell: ({ value }) => (
+        <div style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+          {percentageFormat(value)}
+        </div>
+      ),
     },
     {
       Header: "Market Cap",
@@ -82,6 +90,8 @@ const Home = () => {
       Cell: ({ value }) => numberFormat(value),
     },
   ]);
+
+  console.log(cryptocurrenciesData);
 
   return (
     <div>
