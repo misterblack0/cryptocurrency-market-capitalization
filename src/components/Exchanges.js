@@ -45,20 +45,40 @@ const Exchanges = () => {
   const columns = useMemo(() => [
     {
       Header: "#",
-      accessor: "trust_score_rank",
+      accessor: "id",
     },
     {
       Header: "Name",
       accessor: "name",
     },
     {
-      Header: "Trust Score",
-      accessor: "trust_score",
+      Header: "Market Pairs",
+      accessor: "num_market_pairs",
       Cell: ({ value }) => numberFormat(value),
     },
     {
-      Header: "Launched",
-      accessor: "year_established",
+      Header: "24h",
+      accessor: "quote.USD.percent_change_volume_24h",
+    },
+    {
+      Header: "7d",
+      accessor: "quote.USD.percent_change_volume_7d",
+    },
+    {
+      Header: "30d",
+      accessor: "quote.USD.percent_change_volume_30d",
+    },
+    {
+      Header: "24h Volume",
+      accessor: "quote.USD.volume_24h_adjusted",
+    },
+    {
+      Header: "7d Volume",
+      accessor: "quote.USD.volume_7d",
+    },
+    {
+      Header: "30d Volume",
+      accessor: "quote.USD.volume_30d",
     },
   ]);
 

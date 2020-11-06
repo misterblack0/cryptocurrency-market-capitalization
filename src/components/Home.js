@@ -60,18 +60,18 @@ const Home = () => {
       Header: "24h",
       accessor: "quote.USD.percent_change_24h",
       Cell: ({ value }) => (
-        <div style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+        <span style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
           {percentageFormat(value)}
-        </div>
+        </span>
       ),
     },
     {
       Header: "7d",
       accessor: "quote.USD.percent_change_7d",
       Cell: ({ value }) => (
-        <div style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+        <span style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
           {percentageFormat(value)}
-        </div>
+        </span>
       ),
     },
     {
