@@ -2,12 +2,7 @@ import React from "react";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Table } from "./Table";
-import {
-  priceFormat,
-  currencyFormat,
-  percentageFormat,
-  numberFormat,
-} from "./dataFormat";
+import { currencyFormat, percentageFormat, numberFormat } from "./dataFormat";
 import "../styles/table.scss";
 
 const Exchanges = () => {
@@ -59,30 +54,46 @@ const Exchanges = () => {
     {
       Header: "24h",
       accessor: "quote.USD.percent_change_volume_24h",
+      Cell: ({ value }) => (
+        <span style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+          {percentageFormat(value)}
+        </span>
+      ),
     },
     {
       Header: "7d",
       accessor: "quote.USD.percent_change_volume_7d",
+      Cell: ({ value }) => (
+        <span style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+          {percentageFormat(value)}
+        </span>
+      ),
     },
     {
       Header: "30d",
       accessor: "quote.USD.percent_change_volume_30d",
+      Cell: ({ value }) => (
+        <span style={value < 0 ? { color: "#EA3943" } : { color: "#16C784" }}>
+          {percentageFormat(value)}
+        </span>
+      ),
     },
     {
       Header: "24h Volume",
       accessor: "quote.USD.volume_24h_adjusted",
+      Cell: ({ value }) => currencyFormat(value),
     },
     {
       Header: "7d Volume",
       accessor: "quote.USD.volume_7d",
+      Cell: ({ value }) => currencyFormat(value),
     },
     {
       Header: "30d Volume",
       accessor: "quote.USD.volume_30d",
+      Cell: ({ value }) => currencyFormat(value),
     },
   ]);
-
-  console.log(exchangesData);
 
   return (
     <div>

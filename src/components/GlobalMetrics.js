@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import numberFormat from "./dataFormat.js";
+import { percentageFormat, numberFormat } from "./dataFormat";
 import "../styles/globalMetrics.scss";
 
 const GlobalMetrics = () => {
@@ -39,9 +39,11 @@ const GlobalMetrics = () => {
 
   return (
     <div className="container">
-      <span>Cryptocurrencies: {globalData.active_cryptocurrencies}</span>
-      <span>BTC Dominance: {globalData.btc_dominance}</span>
-      <span>Exchanges: {globalData.active_exchanges}</span>
+      <span>
+        Cryptocurrencies: {numberFormat(globalData.active_cryptocurrencies)}
+      </span>
+      <span>BTC Dominance: {percentageFormat(globalData.btc_dominance)}</span>
+      <span>Exchanges: {numberFormat(globalData.active_exchanges)}</span>
     </div>
   );
 };
