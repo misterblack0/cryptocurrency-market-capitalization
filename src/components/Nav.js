@@ -4,12 +4,15 @@ import "../styles/nav.scss";
 
 const Nav = () => (
   <nav>
-    <h3>Logo</h3>
+    <h3>CryptoPrices</h3>
     <ul>
-      <Link to="/" style={{ textDecoration: "none" }}>
+      <Link to="/" style={{ textDecoration: "none", marginLeft: "5rem" }}>
         <li>Cryptocurrencies</li>
       </Link>
-      <Link to="/exchanges" style={{ textDecoration: "none" }}>
+      <Link
+        to="/exchanges"
+        style={{ textDecoration: "none", marginLeft: "5rem" }}
+      >
         <li>Exchanges</li>
       </Link>
     </ul>

@@ -50,8 +50,8 @@ table th {
 }
 
 .btn-primary {
-  color: #ffffff;
-  background: #2e7ad0;
+  color: #000;
+  background: rgb(234, 237, 240);
   border: 1px solid transparent;
   font-size: 1.1rem;
   line-height: 1.5;
@@ -113,6 +113,5 @@ table th {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
 }

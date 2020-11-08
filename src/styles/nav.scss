@@ -1,15 +1,18 @@
 nav {
+  margin: 2rem 0;
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 
   & ul {
-    width: 80%;
+    width: 100%;
     list-style: none;
     display: flex;
 
     & li {
       font-size: 1.5rem;
-      font-weight: 800;
+      font-weight: 500;
       color: #000;
     }
   }
