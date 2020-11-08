@@ -1,6 +1,8 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  color: #000;
+  font-size: 1.4rem;
 }
 
 table td,
@@ -16,6 +18,7 @@ th {
 }
 
 table tr:hover {
+  transition: all 0.2s;
   background-color: #f8fafd;
 }
 
@@ -86,8 +89,10 @@ table th {
   }
 }
 
-.page-size {
+.header__page-size,
+.footer__page-size {
   width: 12%;
+  font-size: 1.3rem;
   align-items: center;
 
   & select {
@@ -96,9 +101,18 @@ table th {
     background: rgb(239, 242, 245);
     border: none;
     outline: none;
+    margin-left: 1rem;
   }
 
   & option {
     background: #fff;
   }
+}
+
+.header__page-size {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }

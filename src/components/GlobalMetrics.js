@@ -38,12 +38,25 @@ const GlobalMetrics = () => {
   console.log(globalData.total_cryptocurrencies);
 
   return (
-    <div className="container">
-      <span>
-        Cryptocurrencies: {numberFormat(globalData.active_cryptocurrencies)}
+    <div className="global-metrics">
+      <span className="global-metrics__block">
+        Cryptocurrencies:{" "}
+        <span className="global-metrics__link">
+          {numberFormat(globalData.active_cryptocurrencies)}
+        </span>
       </span>
-      <span>BTC Dominance: {percentageFormat(globalData.btc_dominance)}</span>
-      <span>Exchanges: {numberFormat(globalData.active_exchanges)}</span>
+      <span className="global-metrics__block">
+        BTC Dominance:{" "}
+        <span className="global-metrics__link">
+          {percentageFormat(globalData.btc_dominance)}
+        </span>
+      </span>
+      <span className="global-metrics__block">
+        Exchanges:{" "}
+        <span className="global-metrics__link">
+          {numberFormat(globalData.active_exchanges)}
+        </span>
+      </span>
     </div>
   );
 };

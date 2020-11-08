@@ -59,6 +59,21 @@ export const Table = ({ columns, data }) => {
           />
         </div>
       </div>
+
+      <div className="header__page-size">
+          <span>Rows per page</span>
+          <select
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+          >
+            {[10, 25, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                {pageSize}
+              </option>
+            ))}
+          </select>
+        </div>
+
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -166,7 +181,7 @@ export const Table = ({ columns, data }) => {
             {"»"}
           </button>
         </div>
-        <div className="page-size horizontal">
+        <div className="footer__page-size">
           <span>Rows per page</span>
           <select
             value={pageSize}
